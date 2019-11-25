@@ -22,9 +22,17 @@ spring:
         max-active: 8
         max-idle: 8
         min-idle: 0
+  # config thymeleaf
+  thymeleaf:
+    mode: HTML5
+    encoding: UTF-8
+    #Develop configuration: false
+    cache: false
+    #Templates configuration
+    prefix: classpath:/templates
 
 cn.willlu.host: http://192.168.2.100:8080
 cn.willlu.host.url: ${cn.willlu.host}/short/
 
 thread.pool.corePoolSize: 32
-thread.pool.delay: 5
+thread.pool.delay: 2
