@@ -4,7 +4,6 @@ import cn.willlu.shorturl.cache.Cache;
 import cn.willlu.shorturl.entity.TbShortUrl;
 import cn.willlu.shorturl.exception.NoQueryResultReturnException;
 import cn.willlu.shorturl.repository.TbShortUrlRepository;
-import cn.willlu.shorturl.service.AsyncTaskService;
 import cn.willlu.shorturl.service.IShortUrlService;
 import cn.willlu.shorturl.utils.GeneratorUtil;
 import cn.willlu.shorturl.utils.UrlUtil;
@@ -39,6 +38,8 @@ public class ShortUrlServiceImpl implements IShortUrlService {
             throw new IllegalArgumentException("The URL format Error: Does not conform to url[" + longUrl + "] specification.");
         }
 
+        longUrl = UrlUtil.autoCompletionUrl(longUrl);
+
         String code = cache.getCode(longUrl);
 
         if (code != null) {
@@ -53,7 +54,9 @@ public class ShortUrlServiceImpl implements IShortUrlService {
         tbShortUrl.setLongUrl(longUrl);
         tbShortUrl.setShortUrl(code);
 
-        AsyncTaskService.asyncSendTask(() -> tbShortUrlRepository.save(tbShortUrl));
+        tbShortUrlRepository.save(tbShortUrl);
+
+        /// AsyncTaskService.asyncSendTask(() -> tbShortUrlRepository.save(tbShortUrl));
 
         log.info("==== Method: compress, LongUrl: {}, Result: {} ====", longUrl, hostUrl + code);
 

@@ -82,10 +82,4 @@ public class GeneratorUtil {
         return result;
     }
 
-    public static void main(String[] args) {
-        String url = getShortUrl("http:www.baidu.com");
-
-        System.out.println(url);
-    }
-
 }

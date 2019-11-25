@@ -6,9 +6,10 @@ package cn.willlu.shorturl.enums;
  */
 public enum ResultEnum {
 
-    UNKNOWN_ERROR(-1, false, "未知错误"),
-    ERROR(1020, false, "网路错误"),
-    SUCCESS(10000, true, "成功");
+    UNKNOWN_ERROR(-1, false, "Unknown Error"),
+    NOT_FOUNT(404, false, "Not Fount Resource"),
+    ERROR(500, false, "Internal Server Error"),
+    SUCCESS(200, true, "ok");
 
     private Integer code;
     private Boolean status;

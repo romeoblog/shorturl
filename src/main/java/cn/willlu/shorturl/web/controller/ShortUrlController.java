@@ -31,11 +31,11 @@ public class ShortUrlController {
         return ResponseEntity.ok("ok!");
     }
 
-    @GetMapping("/{shortCode}")
+    @GetMapping("/{shortCode:[0-9a-zA-Z]{8}$}")
     public RedirectView decompress(@PathVariable("shortCode") String shortCode) {
         String longUrl = shortUrlService.decompress(shortCode);
 
-        RedirectView red = new RedirectView(longUrl,true);
+        RedirectView red = new RedirectView(longUrl,false);
         red.setStatusCode(HttpStatus.FOUND);
 
         return red;

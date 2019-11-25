@@ -2,6 +2,7 @@ package cn.willlu.shorturl.web.vo;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 /**
@@ -11,6 +12,7 @@ import java.io.Serializable;
 @Data
 public class LongUrlVO implements Serializable {
 
+    @NotBlank
     private String longUrl;
 
 }
