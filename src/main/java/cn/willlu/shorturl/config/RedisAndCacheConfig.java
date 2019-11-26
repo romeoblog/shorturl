@@ -19,6 +19,10 @@ import cn.willlu.shorturl.cache.RedisIdGenerator;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.redisson.Redisson;
+import org.redisson.api.RedissonClient;
+import org.redisson.config.Config;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cache.CacheManager;
@@ -46,6 +50,9 @@ import java.time.Duration;
 @Configuration
 @ConditionalOnClass({RedisTemplate.class, StringRedisTemplate.class, CacheManager.class})
 public class RedisAndCacheConfig extends CachingConfigurerSupport {
+
+    @Value("${redis.address}")
+    private String redisServerAddress;
 
     @Bean
     @ConditionalOnMissingBean
@@ -89,6 +96,13 @@ public class RedisAndCacheConfig extends CachingConfigurerSupport {
         return RedisCacheManager
                 .builder(RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory))
                 .cacheDefaults(redisCacheConfiguration).build();
+    }
+
+    @Bean
+    public RedissonClient redissonClient() {
+        Config config = new Config();
+        config.useSingleServer().setAddress(redisServerAddress);
+        return Redisson.create(config);
     }
 
 }

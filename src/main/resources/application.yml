@@ -31,6 +31,8 @@ spring:
     #Templates configuration
     prefix: classpath:/templates
 
+redis.address: redis://${spring.redis.host}:${spring.redis.port}
+
 cn.willlu.host: http://192.168.2.100:8080
 cn.willlu.host.url: ${cn.willlu.host}/short/
 

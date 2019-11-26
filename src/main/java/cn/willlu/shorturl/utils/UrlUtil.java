@@ -1,5 +1,11 @@
 package cn.willlu.shorturl.utils;
 
+import com.linkedin.urls.NormalizedUrl;
+import com.linkedin.urls.Url;
+
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,14 +29,13 @@ public class UrlUtil {
     }
 
     public static String autoCompletionUrl(String url) {
-        if (checkHttpUrl(url)) {
-            if (url.startsWith(HTTP) || url.startsWith(HTTPS)) {
-                return url;
-            }
-            return HTTP + url;
-        }
-        return null;
-    }
+        try {
+            NormalizedUrl normalizedUrl = Url.create(url).normalize();
 
+            return normalizedUrl.getFullUrl();
+        } catch (Exception ex) {
+            return null;
+        }
+    }
 
 }
