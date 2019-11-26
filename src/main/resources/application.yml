@@ -24,7 +24,7 @@ spring:
         min-idle: 0
   # config thymeleaf
   thymeleaf:
-    mode: HTML5
+    mode: HTML
     encoding: UTF-8
     #Develop configuration: false
     cache: false
