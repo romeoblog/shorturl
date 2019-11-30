@@ -4,6 +4,7 @@ import cn.willlu.shorturl.cache.Cache;
 import cn.willlu.shorturl.entity.TbShortUrl;
 import cn.willlu.shorturl.exception.NoQueryResultReturnException;
 import cn.willlu.shorturl.repository.TbShortUrlRepository;
+import cn.willlu.shorturl.service.AsyncExecuteService;
 import cn.willlu.shorturl.service.IShortUrlService;
 import cn.willlu.shorturl.utils.GeneratorUtil;
 import cn.willlu.shorturl.utils.UrlUtil;
@@ -54,9 +55,9 @@ public class ShortUrlServiceImpl implements IShortUrlService {
         tbShortUrl.setLongUrl(longUrl);
         tbShortUrl.setShortUrl(code);
 
-        tbShortUrlRepository.save(tbShortUrl);
+        /// tbShortUrlRepository.save(tbShortUrl);
 
-        /// AsyncTaskService.asyncSendTask(() -> tbShortUrlRepository.save(tbShortUrl));
+        AsyncExecuteService.execute(() -> tbShortUrlRepository.save(tbShortUrl));
 
         log.info("==== Method: compress, LongUrl: {}, Result: {} ====", longUrl, hostUrl + code);
 
