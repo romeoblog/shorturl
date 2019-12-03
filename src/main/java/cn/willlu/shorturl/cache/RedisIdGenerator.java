@@ -18,11 +18,10 @@ package cn.willlu.shorturl.cache;
 import org.springframework.data.redis.core.RedisTemplate;
 
 /**
- * RedisIdGenerator
+ * The type redis id generator
  *
- * @author Joe-Benji
- * @date 2019-04-08
- * @since 1.0.0
+ * @author willlu.zheng
+ * @date 2019-12-03
  */
 public class RedisIdGenerator {
 

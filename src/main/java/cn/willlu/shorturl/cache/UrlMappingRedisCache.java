@@ -18,8 +18,12 @@ public class UrlMappingRedisCache implements Cache {
      */
     private static final Long KEY_EXPIRE = 1L;
 
+    private final RedisTemplate<String, String> redisTemplate;
+
     @Autowired
-    private RedisTemplate<String, String> redisTemplate;
+    public UrlMappingRedisCache(RedisTemplate<String, String> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
     @Override
     public void put(String code, String url) {

@@ -22,11 +22,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class ShortUrlServiceImpl implements IShortUrlService {
 
-    @Autowired
-    private Cache cache;
+    private final Cache cache;
+
+    private final TbShortUrlRepository tbShortUrlRepository;
 
     @Autowired
-    private TbShortUrlRepository tbShortUrlRepository;
+    public ShortUrlServiceImpl(Cache cache, TbShortUrlRepository tbShortUrlRepository) {
+        this.cache = cache;
+        this.tbShortUrlRepository = tbShortUrlRepository;
+    }
 
     @Value("${cn.willlu.host.url}")
     private String hostUrl;
