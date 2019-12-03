@@ -29,11 +29,13 @@ public class AsyncExecuteService {
 
     @PreDestroy
     private void destroy() {
-        executor.shutdownNow();
-        log.info("==== Thread executor shutdownNow success! ====");
+        if (executor != null) {
+            executor.shutdownNow();
+            log.info("==== Thread executor shutdownNow success! ====");
+        }
     }
 
     public static void execute(Runnable command) {
-        executor.execute(command);
+        executor.submit(command);
     }
 }
