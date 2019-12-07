@@ -35,7 +35,7 @@ public class AsyncExecuteService {
         }
     }
 
-    public static void execute(Runnable command) {
+    public static void submit(Runnable command) {
         executor.submit(command);
     }
 }
