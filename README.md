@@ -25,6 +25,25 @@ CREATE TABLE `tb_short_url` (
 ) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8 COMMENT='短网址（Short URL）映射关系';
 SET FOREIGN_KEY_CHECKS = 1;
 
+DROP TABLE IF EXISTS `tb_report_log`;
+CREATE TABLE `tb_report_log`
+(
+    `id`         int(11)      NOT NULL AUTO_INCREMENT,
+    `ip`         varchar(30)  NOT NULL,
+    `url`        varchar(150) NOT NULL,
+    `pv`         int(11)      NOT NULL,
+    `uv`         int(11)      NOT NULL,
+    `create_at`  timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_at`  datetime              DEFAULT NULL COMMENT '更改时间',
+    `deleted`    int(11)               DEFAULT '0' COMMENT '0-未删除 1已删除',
+    `version`    int(11)               DEFAULT '0' COMMENT '版本号',
+    `user_agent` varchar(200)          NOT NULL,
+    `method`     varchar(10)           NOT NULL,
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 6 DEFAULT CHARSET = utf8 COMMENT='短网址（Short URL）统计用户访问信息';
+SET FOREIGN_KEY_CHECKS = 1;
+
+
 ```
 
 ## 短连接算法（参考微博短链接算法方式）
@@ -46,7 +65,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 ## 基本环境
 
 1. 下载 JDK 8+, Maven 3.2+, Mysql 5.7+, Redis 3.2+
-2. 导入数据表: tb_short_url.sql
+2. 导入数据表: db.sql
 2. 修改 SpringBoot 配置文件: application.yml
 
 ## 生产环境
