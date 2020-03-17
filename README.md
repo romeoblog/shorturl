@@ -107,10 +107,6 @@ curl http://localhost:8080/short/wkUZtF58
 虽然说这个项目可支持分布式项目，尽管最终只是一个简单的实现，但是在这个过程中还是学到了一些经验。由于我出道不久，初入IT江湖，资历浅雹，如有更好的方式或其他更好的解决方案，欢迎一起交流和讨论，在后续不断的学习中，会积累更多的经验，加油！
 
 
-## 附加
-
-分布式SpringCloud项目: [spring-cloud](https://github.com/romeoblog/spring-cloud) 
-
 ## 联系方式
 
 #### 邮箱：
