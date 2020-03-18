@@ -4,14 +4,30 @@ spring:
   application:
     name: mesh-short
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
     platform: mysql
     url: jdbc:mysql://localhost:3306/db_shorturl?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
     password: 123456
+    #The HikariCP pooled DataSource.
+    hikari:
+      pool-name: Retail_HikariCP
+      minimum-idle: 5 #min connection number
+      idle-timeout: 180000 #Idle connection survival time, default: 600000ms
+      maximum-pool-size: 10 #Maximum number of connections in the connection pool, default: 10
+      auto-commit: true  #auto-commit, default: true
+      max-lifetime: 1800000 #Controls the longest lifetime of connections in the pool. A value of 0 indicates an infinite lifetime，, default: 1800000ms
+      connection-timeout: 6000 #6000 #mysql connection timeout, default: 30000ms
+      connection-test-query: SELECT 1
   jpa:
     show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        max_fetch_depth: 1
+        ddl-auto: update
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        open-in-view: false
   redis:
     database: 0
     host: 127.0.0.1
@@ -33,5 +49,5 @@ spring:
 
 redis.address: redis://${spring.redis.host}:${spring.redis.port}
 
-cn.willlu.host: http://192.168.2.100:8080
+cn.willlu.host: http://192.168.2.101:8080
 cn.willlu.host.url: ${cn.willlu.host}/short/
