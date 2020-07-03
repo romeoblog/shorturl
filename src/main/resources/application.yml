@@ -6,9 +6,9 @@ spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     platform: mysql
-    url: jdbc:mysql://localhost:3306/db_shorturl?useUnicode=true&characterEncoding=utf-8&useSSL=false
-    username: root
-    password: 123456
+    url: jdbc:mysql://${MYSQL_SERVICE_HOST:localhost}:${MYSQL_SERVICE_PORT:3306}/${MYSQL_SERVICE_DB_NAME:db_shorturl}?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: ${MYSQL_SERVICE_USER:root}
+    password: ${MYSQL_SERVICE_PASSWORD:123456}
     #The HikariCP pooled DataSource.
     hikari:
       pool-name: Retail_HikariCP
@@ -30,9 +30,9 @@ spring:
         open-in-view: false
   redis:
     database: 0
-    host: 127.0.0.1
-    port: 6379
-    password:
+    host: ${REDIS_SERVICE_HOST:localhost}
+    port: ${REDIS_SERVICE_PORT:6379}
+    password: ${REDIS_SERVICE_PASSWORD:}
     jedis:
       pool:
         max-active: 8
@@ -49,5 +49,5 @@ spring:
 
 redis.address: redis://${spring.redis.host}:${spring.redis.port}
 
-cn.willlu.host: http://192.168.2.101:8080
+cn.willlu.host: ${CN_WILLLU_HOST:http://localhost:8080}
 cn.willlu.host.url: ${cn.willlu.host}/short/
