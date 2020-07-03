@@ -59,9 +59,9 @@ public class ShortUrlServiceImpl implements IShortUrlService {
         tbShortUrl.setLongUrl(longUrl);
         tbShortUrl.setShortUrl(code);
 
-        /// tbShortUrlRepository.save(tbShortUrl);
+        tbShortUrlRepository.save(tbShortUrl);
 
-        AsyncExecuteService.submit(() -> tbShortUrlRepository.save(tbShortUrl));
+        // AsyncExecuteService.submit(() -> tbShortUrlRepository.save(tbShortUrl));
 
         log.info("==== Method: compress, LongUrl: {}, Result: {} ====", longUrl, hostUrl + code);
 
