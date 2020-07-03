@@ -20,17 +20,17 @@ spring:
       connection-timeout: 6000 #6000 #mysql connection timeout, default: 30000ms
       connection-test-query: SELECT 1
   jpa:
-    show-sql: true
+    show-sql: ${DEBUG_MODEL:true}
     properties:
       hibernate:
-        format_sql: true
+        format_sql: ${DEBUG_MODEL:true}
         max_fetch_depth: 1
         ddl-auto: update
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         open-in-view: false
   redis:
     database: 0
-    host: ${REDIS_SERVICE_HOST:localhost}
+    host: ${REDIS_SERVICE_HOST:192.168.110.161}
     port: ${REDIS_SERVICE_PORT:6379}
     password: ${REDIS_SERVICE_PASSWORD:}
     jedis:
@@ -49,5 +49,5 @@ spring:
 
 redis.address: redis://${spring.redis.host}:${spring.redis.port}
 
-cn.willlu.host: ${CN_WILLLU_HOST:http://localhost:8080}
+cn.willlu.host: ${CN_WILLLU_HOST:http://192.168.110.161:8080}
 cn.willlu.host.url: ${cn.willlu.host}/short/
